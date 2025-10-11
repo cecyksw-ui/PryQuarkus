@@ -4,9 +4,11 @@ import com.resolutions.application.ports.in.MovimientoUseCase;
 import com.resolutions.application.ports.out.MovimientoRepositoryPort;
 import com.resolutions.application.ports.out.CuentaRepositoryPort;
 import com.resolutions.model.Movimiento;
+import com.resolutions.model.Cuenta;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -40,6 +42,50 @@ public class MovimientoUseCaseImpl implements MovimientoUseCase {
             movimiento.setFecha(LocalDate.now());
         }
         return movimientoRepository.save(movimiento);
+    }
+    
+    @Override
+    public Integer createMovimientoConValidacion(String tipoMovimiento, BigDecimal monto, Integer cuentaId) {
+        // Validaciones básicas
+        if (cuentaId == null) {
+            throw new IllegalArgumentException("El ID de la cuenta es requerido");
+        }
+        if (tipoMovimiento == null || tipoMovimiento.trim().isEmpty()) {
+            throw new IllegalArgumentException("El tipo de movimiento es requerido");
+        }
+        if (monto == null || monto.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("El monto debe ser mayor a cero");
+        }
+        if (!cuentaRepository.existsById(cuentaId)) {
+            throw new IllegalArgumentException("No existe una cuenta con ID: " + cuentaId);
+        }
+        
+        // Obtener saldo actual
+        BigDecimal saldoActual = getSaldoActualByCuentaId(cuentaId);
+        
+        // Validar débito si es necesario
+        if (Movimiento.TipoMovimiento.DEBITO.getValor().equalsIgnoreCase(tipoMovimiento)) {
+            Movimiento.validarDebito(saldoActual, monto);
+        }
+        
+        // Crear movimiento con cálculo automático
+        Movimiento movimiento = new Movimiento(tipoMovimiento, monto, saldoActual, cuentaId);
+        
+        return movimientoRepository.save(movimiento);
+    }
+    
+    @Override
+    public BigDecimal getSaldoActualByCuentaId(Integer cuentaId) {
+        // Intentar obtener saldo del último movimiento
+        BigDecimal saldoMovimientos = movimientoRepository.getSaldoActualByCuentaId(cuentaId);
+        if (saldoMovimientos != null) {
+            return saldoMovimientos;
+        }
+        
+        // Si no hay movimientos, usar saldo inicial de la cuenta
+        return cuentaRepository.findById(cuentaId)
+                .map(Cuenta::getSaldoInicial)
+                .orElse(BigDecimal.ZERO);
     }
 
     @Override

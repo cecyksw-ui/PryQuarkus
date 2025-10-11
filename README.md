@@ -198,16 +198,16 @@ java -jar target/quarkus-app/quarkus-run.jar
 #### Health Checks
 ```bash
 # Estado de la aplicación
-curl http://localhost:8081/q/health
+curl http://localhost:8080/q/health
 
 # Estado detallado
-curl http://localhost:8081/q/health/live
-curl http://localhost:8081/q/health/ready
+curl http://localhost:8080/q/health/live
+curl http://localhost:8080/q/health/ready
 ```
 
 #### Documentación de API
-- **Swagger UI**: http://localhost:8081/q/swagger-ui
-- **OpenAPI Spec**: http://localhost:8081/q/openapi
+- **Swagger UI**: http://localhost:8080/q/swagger-ui
+- **OpenAPI Spec**: http://localhost:8080/q/openapi
 
 ## 🧪 Testing y Pruebas
 
@@ -237,7 +237,7 @@ curl http://localhost:8081/q/health/ready
 
 #### Crear Persona
 ```bash
-curl -X POST http://localhost:8081/api/personas \
+curl -X POST http://localhost:8080/api/personas \
   -H "Content-Type: application/json" \
   -d '{
     "personaId": "PER001",
@@ -251,7 +251,7 @@ curl -X POST http://localhost:8081/api/personas \
 
 #### Crear Cliente
 ```bash
-curl -X POST http://localhost:8081/api/clientes \
+curl -X POST http://localhost:8080/api/clientes \
   -H "Content-Type: application/json" \
   -d '{
     "personaId": "PER001",
@@ -262,7 +262,7 @@ curl -X POST http://localhost:8081/api/clientes \
 
 #### Crear Cuenta
 ```bash
-curl -X POST http://localhost:8081/api/cuentas \
+curl -X POST http://localhost:8080/api/cuentas \
   -H "Content-Type: application/json" \
   -d '{
     "numeroCuenta": "1001",
@@ -274,7 +274,7 @@ curl -X POST http://localhost:8081/api/cuentas \
 
 #### Crear Movimiento
 ```bash
-curl -X POST http://localhost:8081/api/movimientos \
+curl -X POST http://localhost:8080/api/movimientos \
   -H "Content-Type: application/json" \
   -d '{
     "tipoMovimiento": "DEPOSITO",
@@ -287,19 +287,19 @@ curl -X POST http://localhost:8081/api/movimientos \
 #### Consultar Datos
 ```bash
 # Obtener todas las personas
-curl http://localhost:8081/api/personas
+curl http://localhost:8080/api/personas
 
 # Obtener persona por ID
-curl http://localhost:8081/api/personas/PER001
+curl http://localhost:8080/api/personas/PER001
 
 # Obtener clientes activos
-curl http://localhost:8081/api/clientes?estado=true
+curl http://localhost:8080/api/clientes?estado=true
 
 # Obtener cuentas por cliente
-curl http://localhost:8081/api/cuentas?clienteId=1
+curl http://localhost:8080/api/cuentas?clienteId=1
 
 # Obtener movimientos por cuenta
-curl http://localhost:8081/api/movimientos?cuentaId=1
+curl http://localhost:8080/api/movimientos?cuentaId=1
 ```
 
 ## 🗃️ Gestión de Base de Datos
@@ -423,13 +423,13 @@ docker-compose down -v
 ### Health Checks
 ```bash
 # Estado general
-curl http://localhost:8081/q/health
+curl http://localhost:8080/q/health
 
 # Estado de base de datos
-curl http://localhost:8081/q/health/ready
+curl http://localhost:8080/q/health/ready
 
 # Métricas de aplicación
-curl http://localhost:8081/q/metrics
+curl http://localhost:8080/q/metrics
 ```
 
 ### Logs
@@ -460,7 +460,7 @@ docker run -p 8080:8080 -p 5005:5005 -e JAVA_DEBUG=true quarkus/banking-app:jvm
 #### Desarrollo (`application.properties`)
 ```properties
 # Puerto de desarrollo
-quarkus.http.port=8081
+quarkus.http.port=8080
 
 # Base de datos local
 quarkus.datasource.jdbc.url=jdbc:postgresql://localhost:5432/prueba

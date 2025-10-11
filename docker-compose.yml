@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.3'
 
 services:
   # Base de datos PostgreSQL
@@ -27,8 +27,7 @@ services:
     build: .
     container_name: quarkus-banking-app
     depends_on:
-      postgres:
-        condition: service_healthy
+      - postgres
     environment:
       # Configuración de base de datos
       QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgres:5432/prueba
@@ -37,13 +36,13 @@ services:
       
       # Configuración de Flyway
       QUARKUS_FLYWAY_SCHEMAS: arq_hex
-      QUARKUS_FLYWAY_MIGRATE_AT_START: true
-      QUARKUS_FLYWAY_REPAIR_AT_START: true
-      QUARKUS_FLYWAY_OUT_OF_ORDER: true
+      QUARKUS_FLYWAY_MIGRATE_AT_START: "true"
+      QUARKUS_FLYWAY_REPAIR_AT_START: "true"
+      QUARKUS_FLYWAY_OUT_OF_ORDER: "true"
       
       # Configuración del servidor
       QUARKUS_HTTP_HOST: 0.0.0.0
-      QUARKUS_HTTP_PORT: 8080
+      QUARKUS_HTTP_PORT: "8080"
       
       # Logs
       QUARKUS_LOG_LEVEL: INFO
@@ -52,12 +51,6 @@ services:
       - "8080:8080"
     networks:
       - quarkus-network
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/q/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
 
   # PgAdmin para administrar la base de datos (opcional)
   pgadmin:

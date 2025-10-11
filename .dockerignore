@@ -1,0 +1,37 @@
+# Quarkus build artifacts
+target/
+!target/quarkus-app/
+
+# Maven wrapper
+.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Test reports
+**/target/surefire-reports/
+**/target/failsafe-reports/
+
+# Docker files (no necesarios en la imagen)
+Dockerfile*
+docker-compose*

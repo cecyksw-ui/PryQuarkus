@@ -1,0 +1,20 @@
+
+podman volume ls
+
+podman volume create --label version=23ai oradata
+
+podman run -d --name oracle-free-23ai \
+-p 1521:1521 \
+-e ORACLE_PWD=oracle \
+-e ORACLE_PDB=PDB1 \
+-e ORACLE_CHARACTERSET=UTF32 \
+-e ENABLE_ARCHIVELOG=false \
+-e INIT_SGA_SIZE=2000 \
+-e INIT_PGA_SIZE=500 \
+-e ORACLE_EDITION=developer \
+-e TZ=America/El_Salvador \
+-v oradata:/opt/oracle/oradata \
+--tls-verify=false \
+container-registry.oracle.com/database/free:latest-lite
+
+podman container exec -it oracle-free-23ai /bin/bash

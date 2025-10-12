@@ -4,9 +4,9 @@ import com.resolutions.model.Persona;
 import java.util.List;
 
 public interface PersonaUseCase {
-    String createPersona(Persona persona);
-    Persona getPersonaById(String personaId);
+    Integer createPersona(Persona persona);
+    Persona getPersonaById(Integer personaId);
     List<Persona> getAllPersonas();
-    void updatePersona(String personaId, Persona persona);
-    void deletePersona(String personaId);
+    void updatePersona(Persona persona);
+    void deletePersona(Integer personaId);
 }

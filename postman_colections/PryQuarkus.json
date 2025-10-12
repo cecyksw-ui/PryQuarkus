@@ -1,18 +1,18 @@
 {
 	"info": {
-		"_postman_id": "fe3421b4-468c-4f36-8529-248411fb4a2c",
+		"_postman_id": "15905a69-996a-4a5f-aada-cfc03e79c351",
 		"name": "PryQuarkus",
 		"description": "Colección completa para testing del sistema bancario implementado con Quarkus y arquitectura hexagonal",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "49158105",
-		"_collection_link": "https://cecyksw-4980304.postman.co/workspace/Cecilia-Y%C3%A1nez's-Workspace~c11f165d-490e-4f6d-8b6a-54657ec6595d/collection/49158105-fe3421b4-468c-4f36-8529-248411fb4a2c?action=share&source=collection_link&creator=49158105"
+		"_collection_link": "https://cecyksw-4980304.postman.co/workspace/Cecilia-Y%C3%A1nez's-Workspace~c11f165d-490e-4f6d-8b6a-54657ec6595d/collection/49158105-15905a69-996a-4a5f-aada-cfc03e79c351?action=share&source=collection_link&creator=49158105"
 	},
 	"item": [
 		{
 			"name": "Personas API",
 			"item": [
 				{
-					"name": "Crear Persona",
+					"name": "Crear Persona - Jose Lema",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -23,7 +23,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"personaId\": \"PER001\",\n    \"nombre\": \"Cecilia Yánez\",\n    \"genero\": \"F\",\n    \"edad\": 38,\n    \"direccion\": \"San Vicente, Quito\",\n    \"telefono\": \"0999059120\"\n}"
+							"raw": "{\n    \"nombre\": \"Jose Lema\",\n    \"genero\": \"M\",\n    \"edad\": 30,\n    \"direccion\": \"Otavalo sn y principal\",\n    \"telefono\": \"098254785\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/api/personas",
@@ -39,7 +39,7 @@
 					"response": []
 				},
 				{
-					"name": "Crear Persona - María",
+					"name": "Crear Persona - Marianela Montalvo",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -50,7 +50,34 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"personaId\": \"PER002\",\n    \"nombre\": \"María González López\",\n    \"genero\": \"F\",\n    \"edad\": 28,\n    \"direccion\": \"Calle 5 con Carrera 10, Maracaibo\",\n    \"telefono\": \"0424-9876543\"\n}"
+							"raw": "{\n    \"nombre\": \"Marianela Montalvo\",\n    \"genero\": \"F\",\n    \"edad\": 28,\n    \"direccion\": \"13 junio y Equinoccial\",\n    \"telefono\": \"098875187\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/personas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"personas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Persona - Juan Osorio",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Juan Osorio\",\n    \"genero\": \"M\",\n    \"edad\": 35,\n    \"direccion\": \"Lomas de san isidro\",\n    \"telefono\": \"097548965\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/api/personas",
@@ -71,14 +98,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/personas/PER001",
+							"raw": "{{baseUrl}}/api/personas/1",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"personas",
-								"PER001"
+								"1"
 							]
 						}
 					},
@@ -114,17 +141,17 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"personaId\": \"PER001\",\n    \"nombre\": \"Cecilia Yánez\",\n    \"genero\": \"F\",\n    \"edad\": 38,\n    \"direccion\": \"San Vicente 1, Quito\",\n    \"telefono\": \"0999059120\"\n}"
+							"raw": "{\n    \"nombre\": \"Jose Lema\",\n    \"genero\": \"M\",\n    \"edad\": 31,\n    \"direccion\": \"Otavalo sn y principal - actualizada\",\n    \"telefono\": \"098254785\"\n}"
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/personas/PER001",
+							"raw": "{{baseUrl}}/api/personas/1",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"personas",
-								"PER001"
+								"1"
 							]
 						}
 					},
@@ -136,14 +163,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/personas/PER003",
+							"raw": "{{baseUrl}}/api/personas/3",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"personas",
-								"PER003"
+								"3"
 							]
 						}
 					},
@@ -155,7 +182,7 @@
 			"name": "Clientes API",
 			"item": [
 				{
-					"name": "Crear Cliente",
+					"name": "Crear Cliente - Jose Lema",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -166,7 +193,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"personaId\": \"PER001\",\n    \"contrasena\": \"password123\",\n    \"estado\": true\n}"
+							"raw": "{\n    \"nombres\": \"Jose Lema\",\n    \"genero\": \"M\",\n    \"edad\": 30,\n    \"direccion\": \"Otavalo sn y principal\",\n    \"telefono\": \"098254785\",\n    \"contrasena\": \"1234\",\n    \"estado\": true\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/api/clientes",
@@ -182,7 +209,7 @@
 					"response": []
 				},
 				{
-					"name": "Crear Cliente - María",
+					"name": "Crear Cliente - Marianela Montalvo",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -193,7 +220,34 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"personaId\": \"PER002\",\n    \"contrasena\": \"maria456\",\n    \"estado\": true\n}"
+							"raw": "{\n    \"nombres\": \"Marianela Montalvo\",\n    \"genero\": \"F\",\n    \"edad\": 28,\n    \"direccion\": \"13 junio y Equinoccial\",\n    \"telefono\": \"098875187\",\n    \"contrasena\": \"5678\",\n    \"estado\": true\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/clientes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Cliente - Juan Osorio",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombres\": \"Juan Osorio\",\n    \"genero\": \"M\",\n    \"edad\": 35,\n    \"direccion\": \"Lomas de san isidro\",\n    \"telefono\": \"097548965\",\n    \"contrasena\": \"1245\",\n    \"estado\": true\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/api/clientes",
@@ -214,14 +268,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/clientes/1",
+							"raw": "{{baseUrl}}/api/clientes/3",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"clientes",
-								"1"
+								"3"
 							]
 						}
 					},
@@ -305,17 +359,17 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"personaId\": \"PER001\",\n    \"contrasena\": \"newpassword123\",\n    \"estado\": true\n}"
+							"raw": "{\n    \"nombres\": \"Jose Lema\",\n    \"genero\": \"M\",\n    \"edad\": 30,\n    \"direccion\": \"Otavalo sn y principal\",\n    \"telefono\": \"098254785\",\n    \"contrasena\": \"1234\",\n    \"estado\": false\n}"
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/clientes/1",
+							"raw": "{{baseUrl}}/api/clientes/2",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"clientes",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -327,14 +381,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/clientes/3",
+							"raw": "{{baseUrl}}/api/clientes/2",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"clientes",
-								"3"
+								"2"
 							]
 						}
 					},
@@ -346,7 +400,7 @@
 			"name": "Cuentas API",
 			"item": [
 				{
-					"name": "Crear Cuenta",
+					"name": "Crear Cuenta Ahorro - Jose Lema",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -357,7 +411,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"numeroCuenta\": \"1234567890\",\n    \"tipoCuenta\": \"AHORRO\",\n    \"saldoInicial\": 1000.00,\n    \"clienteId\": 1\n}"
+							"raw": "{\n    \"numeroCuenta\": \"478758\",\n    \"tipoCuenta\": \"AHORRO\",\n    \"saldoInicial\": 2000.00,\n    \"clienteId\": 1\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/api/cuentas",
@@ -373,7 +427,7 @@
 					"response": []
 				},
 				{
-					"name": "Crear Cuenta Corriente",
+					"name": "Crear Cuenta Corriente - Marianela Montalvo",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -384,7 +438,61 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"numeroCuenta\": \"0108-0002-12-9876543210\",\n    \"tipoCuenta\": \"CORRIENTE\",\n    \"saldoInicial\": 2500.00,\n    \"clienteId\": 2\n}"
+							"raw": "{\n    \"numeroCuenta\": \"225487\",\n    \"tipoCuenta\": \"CORRIENTE\",\n    \"saldoInicial\": 2000.00,\n    \"clienteId\": 2\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/cuentas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"cuentas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Cuenta Ahorro - Juan Osorio",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"numeroCuenta\": \"495878\",\n    \"tipoCuenta\": \"AHORRO\",\n    \"saldoInicial\": 0.00,\n    \"clienteId\": 3\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/cuentas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"cuentas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Cuenta Ahorro - Marianela Montalvo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"numeroCuenta\": \"496825\",\n    \"tipoCuenta\": \"AHORRO\",\n    \"saldoInicial\": 540.00,\n    \"clienteId\": 2\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/api/cuentas",
@@ -472,17 +580,17 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"numeroCuenta\": \"0108-0001-12-1234567890\",\n    \"tipoCuenta\": \"AHORRO\",\n    \"saldoInicial\": 1500.00,\n    \"clienteId\": 1\n}"
+							"raw": "{\n    \"numeroCuenta\": \"496825\",\n    \"tipoCuenta\": \"AHORRO\",\n    \"saldoInicial\": 540.00,\n    \"clienteId\": 2\n}"
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/cuentas/1",
+							"raw": "{{baseUrl}}/api/cuentas/3",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"cuentas",
-								"1"
+								"3"
 							]
 						}
 					},
@@ -513,7 +621,7 @@
 			"name": "Movimientos API",
 			"item": [
 				{
-					"name": "Crear Movimiento - Depósito",
+					"name": "Depósito - Jose Lema (478758)",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -524,7 +632,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"fecha\": \"2025-10-11\",\n    \"tipoMovimiento\": \"Credito\",\n    \"valor\": 500.00,\n    \"saldo\": 1500.00,\n    \"cuentaId\": 1\n}"
+							"raw": "{\n    \"fecha\": \"2023-02-10\",\n    \"tipoMovimiento\": \"Credito\",\n    \"valor\": 575.00,\n    \"saldo\": 2575.00,\n    \"cuentaId\": 1\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/api/movimientos",
@@ -540,7 +648,7 @@
 					"response": []
 				},
 				{
-					"name": "Crear Movimiento - Retiro",
+					"name": "Retiro - Jose Lema (478758)",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -551,7 +659,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"fecha\": \"2024-01-16\",\n    \"tipoMovimiento\": \"Debito\",\n    \"valor\": -200.00,\n    \"saldo\": 1300.00,\n    \"cuentaId\": 1\n}"
+							"raw": "{\n    \"fecha\": \"2023-02-10\",\n    \"tipoMovimiento\": \"Debito\",\n    \"valor\": -25.00,\n    \"saldo\": 2550.00,\n    \"cuentaId\": 1\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/api/movimientos",
@@ -579,6 +687,114 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"fecha\": \"2024-01-17\",\n    \"tipoMovimiento\": \"TRANSFERENCIA\",\n    \"valor\": -300.00,\n    \"saldo\": 1000.00,\n    \"cuentaId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/movimientos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"movimientos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Depósito - Marianela Montalvo (225487)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fecha\": \"2023-02-08\",\n    \"tipoMovimiento\": \"Credito\",\n    \"valor\": 594.00,\n    \"saldo\": 2594.00,\n    \"cuentaId\": 2\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/movimientos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"movimientos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retiro - Marianela Montalvo (225487)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fecha\": \"2023-02-08\",\n    \"tipoMovimiento\": \"Debito\",\n    \"valor\": -4.00,\n    \"saldo\": 2590.00,\n    \"cuentaId\": 2\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/movimientos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"movimientos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Depósito - Juan Osorio Ahorro (495878)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fecha\": \"2023-02-06\",\n    \"tipoMovimiento\": \"Credito\",\n    \"valor\": 2000.00,\n    \"saldo\": 2000.00,\n    \"cuentaId\": 3\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/movimientos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"movimientos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retiro - Juan Osorio Ahorro (495878)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fecha\": \"2023-02-06\",\n    \"tipoMovimiento\": \"Debito\",\n    \"valor\": -2000.00,\n    \"saldo\": 0.00,\n    \"cuentaId\": 3\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/api/movimientos",
@@ -716,14 +932,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/movimientos/3",
+							"raw": "{{baseUrl}}/api/movimientos/5",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"api",
 								"movimientos",
-								"3"
+								"5"
 							]
 						}
 					},
@@ -1172,7 +1388,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/reportes/estado_cuenta?cliente_id=1&fecha_inicio=2024-01-01&fecha_fin=2024-12-31",
+							"raw": "{{baseUrl}}/reportes/estado_cuenta?cliente_id=1&fecha_inicio=2023-02-01&fecha_fin=2023-02-28",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -1184,21 +1400,91 @@
 								{
 									"key": "cliente_id",
 									"value": "1",
-									"description": "ID del cliente (requerido)"
+									"description": "ID del cliente Jose Lema"
 								},
 								{
 									"key": "fecha_inicio",
-									"value": "2024-01-01",
-									"description": "Fecha inicio en formato YYYY-MM-DD (requerido)"
+									"value": "2023-02-01",
+									"description": "Fecha inicio en formato YYYY-MM-DD"
 								},
 								{
 									"key": "fecha_fin",
-									"value": "2024-12-31",
-									"description": "Fecha fin en formato YYYY-MM-DD (requerido)"
+									"value": "2023-02-28",
+									"description": "Fecha fin en formato YYYY-MM-DD"
 								}
 							]
 						},
 						"description": "**Nueva funcionalidad v2.0**\n\nGenera un reporte completo de estado de cuenta para un cliente en un rango de fechas específico."
+					},
+					"response": []
+				},
+				{
+					"name": "📊 Estado de Cuenta - Marianela Montalvo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/reportes/estado_cuenta?cliente_id=2&fecha_inicio=2023-02-01&fecha_fin=2023-02-28",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reportes",
+								"estado_cuenta"
+							],
+							"query": [
+								{
+									"key": "cliente_id",
+									"value": "2",
+									"description": "ID del cliente Marianela Montalvo"
+								},
+								{
+									"key": "fecha_inicio",
+									"value": "2023-02-01",
+									"description": "Fecha inicio en formato YYYY-MM-DD"
+								},
+								{
+									"key": "fecha_fin",
+									"value": "2023-02-28",
+									"description": "Fecha fin en formato YYYY-MM-DD"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "📊 Estado de Cuenta - Juan Osorio",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/reportes/estado_cuenta?cliente_id=3&fecha_inicio=2023-02-01&fecha_fin=2023-02-28",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reportes",
+								"estado_cuenta"
+							],
+							"query": [
+								{
+									"key": "cliente_id",
+									"value": "3",
+									"description": "ID del cliente Juan Osorio"
+								},
+								{
+									"key": "fecha_inicio",
+									"value": "2023-02-01",
+									"description": "Fecha inicio en formato YYYY-MM-DD"
+								},
+								{
+									"key": "fecha_fin",
+									"value": "2023-02-28",
+									"description": "Fecha fin en formato YYYY-MM-DD"
+								}
+							]
+						}
 					},
 					"response": []
 				},
@@ -1348,7 +1634,10 @@
 			"name": "New Request",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		}

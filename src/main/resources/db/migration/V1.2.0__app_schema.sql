@@ -23,7 +23,7 @@ CREATE TABLE arq_hex.gencatsdeta (
 -- Tabla Persona
 -- ============================================
 CREATE TABLE arq_hex.persona (
-    persona_id VARCHAR(10) PRIMARY KEY,
+    persona_id SERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     genero VARCHAR(10),
     edad INTEGER,    
@@ -36,7 +36,7 @@ CREATE TABLE arq_hex.persona (
 -- ============================================
 CREATE TABLE arq_hex.cliente (
     cliente_id SERIAL PRIMARY KEY,
-    persona_id VARCHAR(10) UNIQUE NOT NULL,
+    persona_id INTEGER UNIQUE NOT NULL,
     contrasena VARCHAR(50) NOT NULL,
     estado BOOLEAN NOT NULL DEFAULT TRUE,
     FOREIGN KEY (persona_id) REFERENCES arq_hex.persona(persona_id)

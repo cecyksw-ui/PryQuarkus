@@ -7,8 +7,9 @@ import jakarta.persistence.*;
 public class Persona {
     
     @Id
-    @Column(name = "persona_id", length = 10)
-    private String personaId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "persona_id")
+    private Integer personaId;
     
     @Column(name = "nombre", length = 100, nullable = false)
     private String nombre;
@@ -28,7 +29,7 @@ public class Persona {
     public Persona() {
     }
 
-    public Persona(String personaId, String nombre, String genero, Integer edad, String direccion, String telefono) {
+    public Persona(Integer personaId, String nombre, String genero, Integer edad, String direccion, String telefono) {
         this.personaId = personaId;
         this.nombre = nombre;
         this.genero = genero;
@@ -37,11 +38,11 @@ public class Persona {
         this.telefono = telefono;
     }
 
-    public String getPersonaId() {
+    public Integer getPersonaId() {
         return personaId;
     }
 
-    public void setPersonaId(String personaId) {
+    public void setPersonaId(Integer personaId) {
         this.personaId = personaId;
     }
 
@@ -88,7 +89,7 @@ public class Persona {
     @Override
     public String toString() {
         return "Persona{" +
-                "personaId='" + personaId + '\'' +
+                "personaId=" + personaId +
                 ", nombre='" + nombre + '\'' +
                 ", genero='" + genero + '\'' +
                 ", edad=" + edad +

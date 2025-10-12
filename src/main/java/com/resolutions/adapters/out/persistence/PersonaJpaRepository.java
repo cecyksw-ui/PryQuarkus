@@ -18,13 +18,14 @@ public class PersonaJpaRepository implements PersonaRepositoryPort {
 
     @Override
     @Transactional
-    public String save(Persona persona) {
+    public Integer save(Persona persona) {
         entityManager.persist(persona);
+        entityManager.flush(); // Forzar flush para obtener el ID generado
         return persona.getPersonaId();
     }
 
     @Override
-    public Optional<Persona> findById(String personaId) {
+    public Optional<Persona> findById(Integer personaId) {
         Persona persona = entityManager.find(Persona.class, personaId);
         return Optional.ofNullable(persona);
     }
@@ -36,7 +37,7 @@ public class PersonaJpaRepository implements PersonaRepositoryPort {
 
     @Override
     @Transactional
-    public void update(String personaId, Persona persona) {
+    public void update(Integer personaId, Persona persona) {
         Persona existingPersona = entityManager.find(Persona.class, personaId);
         if (existingPersona != null) {
             existingPersona.setNombre(persona.getNombre());
@@ -50,7 +51,7 @@ public class PersonaJpaRepository implements PersonaRepositoryPort {
 
     @Override
     @Transactional
-    public void deleteById(String personaId) {
+    public void deleteById(Integer personaId) {
         Persona persona = entityManager.find(Persona.class, personaId);
         if (persona != null) {
             entityManager.remove(persona);
@@ -58,7 +59,7 @@ public class PersonaJpaRepository implements PersonaRepositoryPort {
     }
 
     @Override
-    public boolean existsById(String personaId) {
+    public boolean existsById(Integer personaId) {
         return findById(personaId).isPresent();
     }
 }

@@ -11,8 +11,8 @@ public class Cliente {
     @Column(name = "cliente_id")
     private Integer clienteId;
     
-    @Column(name = "persona_id", length = 10, unique = true, nullable = false)
-    private String personaId;
+    @Column(name = "persona_id", unique = true, nullable = false)
+    private Integer personaId;
     
     @Column(name = "contrasena", length = 50, nullable = false)
     private String contrasena;
@@ -27,7 +27,7 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(Integer clienteId, String personaId, String contrasena, Boolean estado) {
+    public Cliente(Integer clienteId, Integer personaId, String contrasena, Boolean estado) {
         this.clienteId = clienteId;
         this.personaId = personaId;
         this.contrasena = contrasena;
@@ -42,11 +42,11 @@ public class Cliente {
         this.clienteId = clienteId;
     }
 
-    public String getPersonaId() {
+    public Integer getPersonaId() {
         return personaId;
     }
 
-    public void setPersonaId(String personaId) {
+    public void setPersonaId(Integer personaId) {
         this.personaId = personaId;
     }
 
@@ -78,7 +78,7 @@ public class Cliente {
     public String toString() {
         return "Cliente{" +
                 "clienteId=" + clienteId +
-                ", personaId='" + personaId + '\'' +
+                ", personaId=" + personaId +
                 ", contrasena='" + contrasena + '\'' +
                 ", estado=" + estado +
                 ", persona=" + persona +

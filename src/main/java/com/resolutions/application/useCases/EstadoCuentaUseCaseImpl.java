@@ -4,11 +4,8 @@ import com.resolutions.application.ports.in.EstadoCuentaUseCase;
 import com.resolutions.application.ports.out.ClienteRepositoryPort;
 import com.resolutions.application.ports.out.CuentaRepositoryPort;
 import com.resolutions.application.ports.out.MovimientoRepositoryPort;
-import com.resolutions.model.Cliente;
-import com.resolutions.model.Cuenta;
-import com.resolutions.model.EstadoCuenta;
-import com.resolutions.model.Movimiento;
-import com.resolutions.model.ResumenCuenta;
+import com.resolutions.application.ports.out.PersonaRepositoryPort;
+import com.resolutions.model.*;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
@@ -28,6 +25,9 @@ public class EstadoCuentaUseCaseImpl implements EstadoCuentaUseCase {
 
     @Inject
     MovimientoRepositoryPort movimientoRepository;
+    
+    @Inject
+    PersonaRepositoryPort personaRepository;
 
     @Override
     public EstadoCuenta generarEstadoCuenta(Integer clienteId, LocalDate fechaInicio, LocalDate fechaFin) {
@@ -76,6 +76,66 @@ public class EstadoCuentaUseCaseImpl implements EstadoCuentaUseCase {
         estadoCuenta.calcularTotales();
 
         return estadoCuenta;
+    }
+    
+    @Override
+    public List<ReporteEstadoCuenta> generarReporteEstadoCuenta(Integer clienteId, LocalDate fechaInicio, LocalDate fechaFin) {
+        // Validaciones
+        if (clienteId == null) {
+            throw new IllegalArgumentException("El ID del cliente es requerido");
+        }
+        if (fechaInicio == null) {
+            throw new IllegalArgumentException("La fecha de inicio es requerida");
+        }
+        if (fechaFin == null) {
+            throw new IllegalArgumentException("La fecha de fin es requerida");
+        }
+        if (fechaInicio.isAfter(fechaFin)) {
+            throw new IllegalArgumentException("La fecha de inicio no puede ser posterior a la fecha de fin");
+        }
+
+        // Obtener cliente y persona
+        Cliente cliente = clienteRepository.findById(clienteId)
+                .orElseThrow(() -> new IllegalArgumentException("Cliente no encontrado con ID: " + clienteId));
+        
+        Persona persona = personaRepository.findById(cliente.getPersonaId())
+                .orElseThrow(() -> new IllegalArgumentException("Persona no encontrada para el cliente: " + clienteId));
+        
+        String nombreCliente = persona.getNombre();
+
+        // Obtener cuentas del cliente
+        List<Cuenta> cuentasCliente = cuentaRepository.findByClienteId(clienteId);
+        
+        List<ReporteEstadoCuenta> reportes = new ArrayList<>();
+        
+        for (Cuenta cuenta : cuentasCliente) {
+            // Obtener movimientos de la cuenta en el rango de fechas
+            List<Movimiento> movimientos = movimientoRepository.findByCuentaIdAndFechaRange(
+                    cuenta.getCuentaId(), 
+                    fechaInicio, 
+                    fechaFin
+            );
+
+            // Crear reporte para cada movimiento
+            for (Movimiento movimiento : movimientos) {
+                ReporteEstadoCuenta reporte = new ReporteEstadoCuenta();
+                reporte.setFecha(movimiento.getFecha());
+                reporte.setCliente(nombreCliente);
+                reporte.setNumeroCuenta(cuenta.getNumeroCuenta());
+                reporte.setTipo(cuenta.getTipoCuenta());
+                reporte.setSaldoInicial(cuenta.getSaldoInicial());
+                reporte.setEstado(cuenta.getEstado());
+                reporte.setMovimiento(movimiento.getValor());
+                reporte.setSaldoDisponible(movimiento.getSaldo());
+                
+                reportes.add(reporte);
+            }
+        }
+        
+        // Ordenar por fecha
+        reportes.sort((r1, r2) -> r1.getFecha().compareTo(r2.getFecha()));
+        
+        return reportes;
     }
 
     private ResumenCuenta generarResumenCuenta(Cuenta cuenta, LocalDate fechaInicio, LocalDate fechaFin) {

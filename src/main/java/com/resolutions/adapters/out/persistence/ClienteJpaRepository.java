@@ -69,7 +69,7 @@ public class ClienteJpaRepository implements ClienteRepositoryPort {
     }
 
     @Override
-    public Optional<Cliente> findByPersonaId(String personaId) {
+    public Optional<Cliente> findByPersonaId(Integer personaId) {
         List<Cliente> result = entityManager.createQuery("SELECT c FROM Cliente c WHERE c.personaId = :personaId", Cliente.class)
                 .setParameter("personaId", personaId)
                 .getResultList();

@@ -29,8 +29,8 @@ public class PersonaResource {
     @Operation(summary = "Crear nueva persona", description = "Crea una nueva persona en el sistema")
     public Response createPersona(Persona persona) {
         try {
-            String personaId = personaUseCase.createPersona(persona);
-            logger.infof("Persona creada con ID: %s", personaId);
+            Integer personaId = personaUseCase.createPersona(persona);
+            logger.infof("Persona creada con ID: %d", personaId);
             return Response.status(Response.Status.CREATED)
                     .entity(Map.of("personaId", personaId, "message", "Persona creada exitosamente"))
                     .build();
@@ -49,7 +49,7 @@ public class PersonaResource {
 
     @GET
     @Path("/{personaId}")
-    public Response getPersonaById(@PathParam("personaId") String personaId) {
+    public Response getPersonaById(@PathParam("personaId") Integer personaId) {
         try {
             Persona persona = personaUseCase.getPersonaById(personaId);
             return Response.ok(persona).build();
@@ -76,10 +76,11 @@ public class PersonaResource {
 
     @PUT
     @Path("/{personaId}")
-    public Response updatePersona(@PathParam("personaId") String personaId, Persona persona) {
+    public Response updatePersona(@PathParam("personaId") Integer personaId, Persona persona) {
         try {
-            personaUseCase.updatePersona(personaId, persona);
-            logger.infof("Persona actualizada con ID: %s", personaId);
+            persona.setPersonaId(personaId);
+            personaUseCase.updatePersona(persona);
+            logger.infof("Persona actualizada con ID: %d", personaId);
             return Response.ok(Map.of("message", "Persona actualizada exitosamente")).build();
         } catch (RuntimeException e) {
             logger.errorf("Error al actualizar persona: %s", e.getMessage());
@@ -96,10 +97,10 @@ public class PersonaResource {
 
     @DELETE
     @Path("/{personaId}")
-    public Response deletePersona(@PathParam("personaId") String personaId) {
+    public Response deletePersona(@PathParam("personaId") Integer personaId) {
         try {
             personaUseCase.deletePersona(personaId);
-            logger.infof("Persona eliminada con ID: %s", personaId);
+            logger.infof("Persona eliminada con ID: %d", personaId);
             return Response.ok(Map.of("message", "Persona eliminada exitosamente")).build();
         } catch (RuntimeException e) {
             logger.errorf("Error al eliminar persona: %s", e.getMessage());

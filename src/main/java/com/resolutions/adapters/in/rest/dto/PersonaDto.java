@@ -1,7 +1,7 @@
 package com.resolutions.adapters.in.rest.dto;
 
 public class PersonaDto {
-    private String personaId;
+    private Integer personaId;
     private String nombre;
     private String genero;
     private Integer edad;
@@ -11,7 +11,7 @@ public class PersonaDto {
     public PersonaDto() {
     }
 
-    public PersonaDto(String personaId, String nombre, String genero, Integer edad, String direccion, String telefono) {
+    public PersonaDto(Integer personaId, String nombre, String genero, Integer edad, String direccion, String telefono) {
         this.personaId = personaId;
         this.nombre = nombre;
         this.genero = genero;
@@ -21,11 +21,11 @@ public class PersonaDto {
     }
 
     // Getters and Setters
-    public String getPersonaId() {
+    public Integer getPersonaId() {
         return personaId;
     }
 
-    public void setPersonaId(String personaId) {
+    public void setPersonaId(Integer personaId) {
         this.personaId = personaId;
     }
 

@@ -1,6 +1,6 @@
-# Sistema Bancario con Quarkus y Arquitectura Hexagonal
+# Sistema   con Quarkus y Arquitectura Hexagonal
 
-Sistema bancario completo implementado con **Quarkus**, **PostgreSQL** y **Arquitectura Hexagonal** que proporciona APIs REST para la gestión de personas, clientes, cuentas y movimientos bancarios.
+Sistema   completo implementado con **Quarkus**, **PostgreSQL** y **Arquitectura Hexagonal** que proporciona APIs REST para la gestión de personas, clientes, cuentas y movimientos bancarios.
 
 ## 🏗️ Arquitectura Hexagonal
 
@@ -517,15 +517,6 @@ git commit -m "fix: validación de saldo insuficiente"
 git commit -m "docs: actualizar documentación de API"
 ```
 
-### Pull Requests
-1. Fork del proyecto
-2. Crear feature branch (`git checkout -b feature/nueva-funcionalidad`)
-3. Commit de cambios (`git commit -am 'feat: nueva funcionalidad'`)
-4. Push branch (`git push origin feature/nueva-funcionalidad`)
-5. Crear Pull Request
-
-
-
 ### Problemas Comunes
 
 #### Error de conexión a PostgreSQL
@@ -544,7 +535,7 @@ psql -h localhost -p 5432 -U postgres -d prueba
 ```bash
 # Cambiar puerto en application.properties
 quarkus.http.port=8082
-
+``
 # O usar variable de entorno
 export QUARKUS_HTTP_PORT=8082
 ```
@@ -561,15 +552,6 @@ export QUARKUS_HTTP_PORT=8082
 ./mvnw flyway:clean flyway:migrate
 ```
 
-#### Memoria insuficiente
-```bash
-# Aumentar memoria para Maven
-export MAVEN_OPTS="-Xmx2g"
-
-# Para Docker
-docker run -m 2g quarkus/banking-app:jvm
-```
-
 ---
 
-> **Nota**: Este proyecto es una demostración de arquitectura hexagonal con Quarkus. Ideal para aprendizaje y como base para sistemas bancarios o financieros más complejos.
+> **Nota**: Este proyecto es una demostración de arquitectura hexagonal con Quarkus. Ideal para aprendizaje y como base para sistemas financieros más complejos.

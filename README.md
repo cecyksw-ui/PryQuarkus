@@ -1,6 +1,6 @@
 # Sistema   con Quarkus y Arquitectura Hexagonal
 
-Sistema   completo implementado con **Quarkus**, **PostgreSQL** y **Arquitectura Hexagonal** que proporciona APIs REST para la gestión de personas, clientes, cuentas y movimientos bancarios.
+Sistema   completo implementado con **Quarkus**, **PostgreSQL** y **Arquitectura Hexagonal** que proporciona APIs REST para la gestión de clientes, cuentas y movimientos bancarios.
 
 ## 🏗️ Arquitectura Hexagonal
 
@@ -21,13 +21,11 @@ La arquitectura hexagonal (Ports and Adapters) organiza la aplicación separando
 - **RESTEasy Reactive** - Servicios REST reactivos
 - **Flyway** - Migraciones de base de datos
 - **OpenAPI/Swagger** - Documentación de API
-- **MapStruct** - Mapeo de objetos
-- **Mockito + JUnit 5** - Testing
+
 
 ### Infraestructura
-- **Docker & Docker Compose** - Containerización
+- **Docker & Docker Toolbox 19.03.1** - Containerización
 - **PgAdmin** - Administración de BD
-- **Health Checks** - Monitoreo de salud
 
 ## 📁 Estructura del Proyecto
 
@@ -508,49 +506,6 @@ QUARKUS_HTTP_PORT=8080
 - 🔍 **Observabilidad** - Health checks y métricas
 - ⚡ **Hot Reload** - Desarrollo rápido
 
-## 🤝 Contribución
-
-### Estructura de Commits
-```bash
-git commit -m "feat: agregar endpoint para transferencias"
-git commit -m "fix: validación de saldo insuficiente"
-git commit -m "docs: actualizar documentación de API"
-```
-
-### Problemas Comunes
-
-#### Error de conexión a PostgreSQL
-```bash
-# Verificar que PostgreSQL esté corriendo
-docker-compose ps postgres
-
-# Revisar logs de PostgreSQL
-docker-compose logs postgres
-
-# Probar conexión directa
-psql -h localhost -p 5432 -U postgres -d prueba
-```
-
-#### Puerto ocupado
-```bash
-# Cambiar puerto en application.properties
-quarkus.http.port=8082
-``
-# O usar variable de entorno
-export QUARKUS_HTTP_PORT=8082
-```
-
-#### Problemas con Flyway
-```bash
-# Reparar migraciones
-./mvnw flyway:repair
-
-# Ver estado
-./mvnw flyway:info
-
-# Limpiar y recrear (¡CUIDADO!)
-./mvnw flyway:clean flyway:migrate
-```
 
 ---
 

@@ -142,7 +142,7 @@ gencatsdeta { codcat, codcor, cordesc, codusr, fechcrea, fechmod }
 ### Prerrequisitos
 - **Java 21** o superior
 - **Maven 3.8+**
-- **Docker** y **Docker Compose**
+- **Docker** y ** Docker Toolbox 19.03.1**
 - **Git**
 
 ### 1. Clonar el Repositorio

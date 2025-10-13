@@ -490,11 +490,10 @@ QUARKUS_HTTP_PORT=8080
 ## 📝 Características del Sistema
 
 ### Funcionalidades Principales
-- ✅ **Gestión de Personas** - CRUD completo con validaciones
+
 - ✅ **Gestión de Clientes** - Herencia de personas con autenticación
 - ✅ **Gestión de Cuentas** - Múltiples cuentas por cliente
-- ✅ **Movimientos Bancarios** - Depósitos, retiros, transferencias
-- ✅ **Sistema de Catálogos** - Configuración flexible
+- ✅ **Movimientos ** - Depósitos, retiros, transferencias
 - ✅ **API REST Completa** - Endpoints documentados con OpenAPI
 - ✅ **Validaciones de Negocio** - Reglas bancarias aplicadas
 - ✅ **Arquitectura Hexagonal** - Separación clara de responsabilidades
@@ -525,11 +524,7 @@ git commit -m "docs: actualizar documentación de API"
 4. Push branch (`git push origin feature/nueva-funcionalidad`)
 5. Crear Pull Request
 
-## 📄 Licencia
 
-Este proyecto está licenciado bajo Apache License 2.0 - ver el archivo [LICENSE](LICENSE) para más detalles.
-
-## 🆘 Troubleshooting
 
 ### Problemas Comunes
 
@@ -574,11 +569,6 @@ export MAVEN_OPTS="-Xmx2g"
 # Para Docker
 docker run -m 2g quarkus/banking-app:jvm
 ```
-
-### Contacto y Soporte
-- 📧 **Email**: dev@resolutions.com
-- 🐛 **Issues**: [GitHub Issues](https://github.com/ronaldsanchez/hexagonal-arquitecture/issues)
-- 📚 **Wiki**: [Documentación completa](https://github.com/ronaldsanchez/hexagonal-arquitecture/wiki)
 
 ---
 

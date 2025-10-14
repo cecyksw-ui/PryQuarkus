@@ -1019,7 +1019,68 @@ Al reportar problemas, incluye:
 
 ---
 
-## 📄 **Licencia**
+## � **Créditos y Referencias**
+
+### 📚 **Inspiración del Proyecto**
+
+Este proyecto fue desarrollado tomando como base y referencia el excelente trabajo de **Ronald Sanchez**, específicamente su implementación de arquitectura hexagonal con Quarkus:
+
+- **📋 Proyecto Original**: [hexagonal-arquitecture](https://github.com/ronaldsanchez/hexagonal-arquitecture)
+- **👨‍💻 Autor**: Ronald Sanchez (@ronaldsanchez)
+- **🏗️ Concepto Base**: Implementación de Ports & Adapters con Quarkus y Java
+
+### 🎯 **¿Qué Tomamos del Proyecto Original?**
+
+- **🏛️ Estructura Arquitectónica**: La organización de packages siguiendo el patrón hexagonal
+- **📁 Distribución de Capas**: Separación clara entre `adapters`, `application` y `model`
+- **⚙️ Configuración Base**: Setup inicial de Quarkus con las dependencias fundamentales
+- **🔧 Patrones de Diseño**: Implementación de puertos y adaptadores
+
+### 🚀 **Nuestras Contribuciones y Extensiones**
+
+Partiendo de la base sólida del proyecto de Ronald, hemos desarrollado y expandido:
+
+- **🏦 Dominio Bancario Completo**: Sistema integral de gestión bancaria
+- **💳 Modelos de Negocio**: Personas, Clientes, Cuentas, Movimientos y Reportes
+- **🧪 Suite de Testing**: 57 pruebas unitarias y de integración
+- **🐳 Containerización**: Docker Compose completo con PostgreSQL y PgAdmin
+- **📊 Migraciones de BD**: Sistema completo con Flyway
+- **📖 Documentación Extensa**: README detallado y APIs documentadas
+- **🔍 Monitoreo**: Health checks y métricas
+- **⚡ Performance**: Optimizaciones y mejoras de rendimiento
+
+### � **Herramientas de Desarrollo Asistidas por IA**
+
+En el desarrollo de este proyecto se utilizaron herramientas de **Inteligencia Artificial** como asistentes de desarrollo, específicamente:
+
+- **🧠 GitHub Copilot**: Para asistencia en la generación de código, documentación y resolución de problemas
+- **💡 Análisis de Código**: Sugerencias de mejores prácticas y optimizaciones
+- **📝 Documentación**: Colaboración en la redacción de documentación técnica y README
+- **🧪 Testing**: Asistencia en la creación de casos de prueba y scenarios de testing
+- **🔍 Code Review**: Análisis y sugerencias de mejoras en la calidad del código
+
+> ⚠️ **Transparencia**: El uso de IA fue complementario al conocimiento técnico del desarrollador, manteniendo siempre el control y revisión humana de todas las implementaciones y decisiones arquitectónicas.
+
+### �🤝 **Agradecimientos**
+
+Queremos expresar nuestro sincero agradecimiento a:
+
+**Ronald Sanchez** por su proyecto base:
+- 🎓 **Educación**: Proporcionar un ejemplo claro de arquitectura hexagonal
+- 🛠️ **Código Base**: Estructura inicial que sirvió como fundamento sólido
+- 💡 **Inspiración**: Demostrar las mejores prácticas con Quarkus
+- 🌟 **Comunidad**: Contribuir al ecosistema open source de Java/Quarkus
+
+**Comunidad Open Source y Herramientas IA**:
+- 🤖 **GitHub Copilot**: Por asistir en el proceso de desarrollo y documentación
+- 👥 **Comunidad Java/Quarkus**: Por las librerías, frameworks y conocimiento compartido
+- 📚 **Documentación y Tutoriales**: Recursos educativos que facilitaron el aprendizaje
+
+> 💬 **Nota**: Este proyecto representa una evolución y expansión del concepto original, desarrollado para fines educativos y demostrativos en el contexto de sistemas bancarios, con el apoyo de herramientas modernas de desarrollo.
+
+---
+
+## �📄 **Licencia**
 
 Este proyecto está licenciado bajo **Apache License 2.0**.
 

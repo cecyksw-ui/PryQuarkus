@@ -15,21 +15,16 @@ public class PersonaUseCaseImpl implements PersonaUseCase {
     PersonaRepositoryPort personaRepository;
 
     @Override
-    public String createPersona(Persona persona) {
-        if (persona.getPersonaId() == null || persona.getPersonaId().trim().isEmpty()) {
-            throw new IllegalArgumentException("El ID de persona es requerido");
-        }
+    public Integer createPersona(Persona persona) {
         if (persona.getNombre() == null || persona.getNombre().trim().isEmpty()) {
             throw new IllegalArgumentException("El nombre es requerido");
         }
-        if (personaRepository.existsById(persona.getPersonaId())) {
-            throw new IllegalArgumentException("Ya existe una persona con el ID: " + persona.getPersonaId());
-        }
+        // No validar ID porque se auto-genera
         return personaRepository.save(persona);
     }
 
     @Override
-    public Persona getPersonaById(String personaId) {
+    public Persona getPersonaById(Integer personaId) {
         return personaRepository.findById(personaId)
                 .orElseThrow(() -> new RuntimeException("Persona no encontrada con ID: " + personaId));
     }
@@ -40,16 +35,18 @@ public class PersonaUseCaseImpl implements PersonaUseCase {
     }
 
     @Override
-    public void updatePersona(String personaId, Persona persona) {
-        if (!personaRepository.existsById(personaId)) {
-            throw new RuntimeException("Persona no encontrada con ID: " + personaId);
+    public void updatePersona(Persona persona) {
+        if (persona.getPersonaId() == null) {
+            throw new IllegalArgumentException("El ID de persona es requerido para actualizar");
         }
-        persona.setPersonaId(personaId);
-        personaRepository.update(personaId, persona);
+        if (!personaRepository.existsById(persona.getPersonaId())) {
+            throw new RuntimeException("Persona no encontrada con ID: " + persona.getPersonaId());
+        }
+        personaRepository.update(persona.getPersonaId(), persona);
     }
 
     @Override
-    public void deletePersona(String personaId) {
+    public void deletePersona(Integer personaId) {
         if (!personaRepository.existsById(personaId)) {
             throw new RuntimeException("Persona no encontrada con ID: " + personaId);
         }

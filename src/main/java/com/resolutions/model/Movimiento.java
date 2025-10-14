@@ -8,6 +8,30 @@ import jakarta.persistence.*;
 @Table(name = "movimiento", schema = "arq_hex")
 public class Movimiento {
     
+    public enum TipoMovimiento {
+        CREDITO("Credito"),
+        DEBITO("Debito");
+        
+        private final String valor;
+        
+        TipoMovimiento(String valor) {
+            this.valor = valor;
+        }
+        
+        public String getValor() {
+            return valor;
+        }
+        
+        public static TipoMovimiento fromString(String text) {
+            for (TipoMovimiento tipo : TipoMovimiento.values()) {
+                if (tipo.valor.equalsIgnoreCase(text)) {
+                    return tipo;
+                }
+            }
+            throw new IllegalArgumentException("Tipo de movimiento no válido: " + text);
+        }
+    }
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "movimiento_id")
@@ -42,6 +66,58 @@ public class Movimiento {
         this.valor = valor;
         this.saldo = saldo;
         this.cuentaId = cuentaId;
+    }
+    
+    /**
+     * Constructor para crear un movimiento con cálculo automático de valor según tipo
+     */
+    public Movimiento(String tipoMovimiento, BigDecimal monto, BigDecimal saldoAnterior, Integer cuentaId) {
+        this.fecha = LocalDate.now();
+        this.tipoMovimiento = tipoMovimiento;
+        this.cuentaId = cuentaId;
+        
+        // Aplicar reglas de negocio: créditos positivos, débitos negativos
+        TipoMovimiento tipo = TipoMovimiento.fromString(tipoMovimiento);
+        if (tipo == TipoMovimiento.CREDITO) {
+            this.valor = monto.abs(); // Asegurar que sea positivo
+            this.saldo = saldoAnterior.add(this.valor);
+        } else { // DEBITO
+            this.valor = monto.abs().negate(); // Asegurar que sea negativo
+            this.saldo = saldoAnterior.add(this.valor); // Restar del saldo
+        }
+    }
+    
+    /**
+     * Verifica si es un movimiento de crédito
+     */
+    public boolean esCredito() {
+        return TipoMovimiento.CREDITO.getValor().equalsIgnoreCase(this.tipoMovimiento);
+    }
+    
+    /**
+     * Verifica si es un movimiento de débito
+     */
+    public boolean esDebito() {
+        return TipoMovimiento.DEBITO.getValor().equalsIgnoreCase(this.tipoMovimiento);
+    }
+    
+    /**
+     * Obtiene el monto absoluto del movimiento
+     */
+    public BigDecimal getMontoAbsoluto() {
+        return valor != null ? valor.abs() : BigDecimal.ZERO;
+    }
+    
+    /**
+     * Valida si se puede realizar un débito con el saldo actual
+     */
+    public static void validarDebito(BigDecimal saldoActual, BigDecimal montoDebito) {
+        if (saldoActual.compareTo(BigDecimal.ZERO) == 0 && montoDebito.compareTo(BigDecimal.ZERO) > 0) {
+            throw new IllegalStateException("Saldo no disponible");
+        }
+        if (saldoActual.subtract(montoDebito).compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalStateException("Saldo insuficiente para realizar la transacción");
+        }
     }
 
     public Integer getMovimientoId() {

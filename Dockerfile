@@ -1,5 +1,5 @@
-# Etapa 1: Build
-FROM maven:3.9.6-eclipse-temurin-21 AS build
+# Etapa 1: Build usando Java 21
+FROM maven:3.9.6-eclipse-temurin-21-alpine AS build
 WORKDIR /app
 
 # Copiar archivos de configuración primero (para cache de Docker)
@@ -18,25 +18,22 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Etapa 2: Runtime
-FROM registry.access.redhat.com/ubi8/openjdk-21:1.19
+FROM eclipse-temurin:21-jre-alpine
 
-ENV LANGUAGE='en_US:en'
-
-# Configuración de usuario no-root por seguridad
-USER 185
+# Crear directorio de la aplicación
+WORKDIR /deployments
 
 # Copiar la aplicación compilada
-COPY --from=build --chown=185 /app/target/quarkus-app/lib/ /deployments/lib/
-COPY --from=build --chown=185 /app/target/quarkus-app/*.jar /deployments/
-COPY --from=build --chown=185 /app/target/quarkus-app/app/ /deployments/app/
-COPY --from=build --chown=185 /app/target/quarkus-app/quarkus/ /deployments/quarkus/
+COPY --from=build /app/target/quarkus-app/lib/ ./lib/
+COPY --from=build /app/target/quarkus-app/*.jar ./
+COPY --from=build /app/target/quarkus-app/app/ ./app/
+COPY --from=build /app/target/quarkus-app/quarkus/ ./quarkus/
 
 # Exponer puerto
 EXPOSE 8080
 
-# Variables de entorno para optimización
-ENV JAVA_OPTS_APPEND="-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager"
-ENV JAVA_APP_JAR="/deployments/quarkus-run.jar"
+# Variables de entorno
+ENV JAVA_OPTS_APPEND="-Dquarkus.http.host=0.0.0.0 -Dquarkus.profile=docker"
 
 # Comando de inicio
-ENTRYPOINT [ "/opt/jboss/container/java/run/run-java.sh" ]
+CMD ["java", "-jar", "quarkus-run.jar"]

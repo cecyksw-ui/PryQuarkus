@@ -20,7 +20,7 @@ public class ClienteUseCaseImpl implements ClienteUseCase {
 
     @Override
     public Integer createCliente(Cliente cliente) {
-        if (cliente.getPersonaId() == null || cliente.getPersonaId().trim().isEmpty()) {
+        if (cliente.getPersonaId() == null) {
             throw new IllegalArgumentException("El ID de persona es requerido");
         }
         if (cliente.getContrasena() == null || cliente.getContrasena().trim().isEmpty()) {
@@ -50,12 +50,14 @@ public class ClienteUseCaseImpl implements ClienteUseCase {
     }
 
     @Override
-    public void updateCliente(Integer clienteId, Cliente cliente) {
-        if (!clienteRepository.existsById(clienteId)) {
-            throw new RuntimeException("Cliente no encontrado con ID: " + clienteId);
+    public void updateCliente(Cliente cliente) {
+        if (cliente.getClienteId() == null) {
+            throw new IllegalArgumentException("El ID del cliente es requerido para actualizar");
         }
-        cliente.setClienteId(clienteId);
-        clienteRepository.update(clienteId, cliente);
+        if (!clienteRepository.existsById(cliente.getClienteId())) {
+            throw new IllegalArgumentException("Cliente no encontrado con ID: " + cliente.getClienteId());
+        }
+        clienteRepository.update(cliente.getClienteId(), cliente);
     }
 
     @Override

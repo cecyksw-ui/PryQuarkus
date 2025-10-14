@@ -44,6 +44,49 @@ public class MovimientoResource {
         }
     }
 
+    @POST
+    @Path("/transaccion")
+    public Response createTransaccion(Map<String, Object> transaccionData) {
+        try {
+            String tipoMovimiento = (String) transaccionData.get("tipoMovimiento");
+            Number montoNumber = (Number) transaccionData.get("monto");
+            Number cuentaIdNumber = (Number) transaccionData.get("cuentaId");
+            
+            if (tipoMovimiento == null || montoNumber == null || cuentaIdNumber == null) {
+                return Response.status(Response.Status.BAD_REQUEST)
+                        .entity(Map.of("error", "Los campos tipoMovimiento, monto y cuentaId son requeridos"))
+                        .build();
+            }
+            
+            java.math.BigDecimal monto = new java.math.BigDecimal(montoNumber.toString());
+            Integer cuentaId = cuentaIdNumber.intValue();
+            
+            Integer movimientoId = movimientoUseCase.createMovimientoConValidacion(tipoMovimiento, monto, cuentaId);
+            logger.infof("Transacción creada con ID: %d", movimientoId);
+            
+            return Response.status(Response.Status.CREATED)
+                    .entity(Map.of("movimientoId", movimientoId, "message", "Transacción procesada exitosamente"))
+                    .build();
+                    
+        } catch (IllegalStateException e) {
+            // Error de validación de saldo
+            logger.errorf("Error de saldo: %s", e.getMessage());
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(Map.of("error", e.getMessage()))
+                    .build();
+        } catch (IllegalArgumentException e) {
+            logger.errorf("Error de validación: %s", e.getMessage());
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(Map.of("error", e.getMessage()))
+                    .build();
+        } catch (Exception e) {
+            logger.errorf("Error interno al procesar transacción: %s", e.getMessage());
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity(Map.of("error", "Error interno del servidor"))
+                    .build();
+        }
+    }
+
     @GET
     @Path("/{movimientoId}")
     public Response getMovimientoById(@PathParam("movimientoId") Integer movimientoId) {

@@ -12,5 +12,5 @@ public interface ClienteRepositoryPort {
     void deleteById(Integer clienteId);
     boolean existsById(Integer clienteId);
     List<Cliente> findByEstado(Boolean estado);
-    Optional<Cliente> findByPersonaId(String personaId);
+    Optional<Cliente> findByPersonaId(Integer personaId);
 }

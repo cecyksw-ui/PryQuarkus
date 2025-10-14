@@ -7,6 +7,7 @@ import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -83,6 +84,40 @@ public class MovimientoJpaRepository implements MovimientoRepositoryPort {
     public List<Movimiento> findByCuentaIdAndFechaRange(Integer cuentaId, LocalDate fechaInicio, LocalDate fechaFin) {
         return entityManager.createQuery("SELECT m FROM Movimiento m WHERE m.cuentaId = :cuentaId AND m.fecha >= :fechaInicio AND m.fecha <= :fechaFin ORDER BY m.fecha DESC", Movimiento.class)
                 .setParameter("cuentaId", cuentaId)
+                .setParameter("fechaInicio", fechaInicio)
+                .setParameter("fechaFin", fechaFin)
+                .getResultList();
+    }
+    
+    @Override
+    public Optional<Movimiento> findLastMovimientoByCuentaId(Integer cuentaId) {
+        List<Movimiento> movimientos = entityManager.createQuery(
+                "SELECT m FROM Movimiento m WHERE m.cuentaId = :cuentaId ORDER BY m.fecha DESC, m.movimientoId DESC", 
+                Movimiento.class)
+                .setParameter("cuentaId", cuentaId)
+                .setMaxResults(1)
+                .getResultList();
+        
+        return movimientos.isEmpty() ? Optional.empty() : Optional.of(movimientos.get(0));
+    }
+    
+    @Override
+    public BigDecimal getSaldoActualByCuentaId(Integer cuentaId) {
+        Optional<Movimiento> ultimoMovimiento = findLastMovimientoByCuentaId(cuentaId);
+        return ultimoMovimiento.map(Movimiento::getSaldo).orElse(null);
+    }
+    
+    @Override
+    public List<Movimiento> findByClienteIdAndFechaRange(Integer clienteId, LocalDate fechaInicio, LocalDate fechaFin) {
+        return entityManager.createQuery(
+                "SELECT m FROM Movimiento m " +
+                "JOIN m.cuenta c " +
+                "WHERE c.clienteId = :clienteId " +
+                "AND m.fecha >= :fechaInicio " +
+                "AND m.fecha <= :fechaFin " +
+                "ORDER BY m.fecha DESC", 
+                Movimiento.class)
+                .setParameter("clienteId", clienteId)
                 .setParameter("fechaInicio", fechaInicio)
                 .setParameter("fechaFin", fechaFin)
                 .getResultList();
